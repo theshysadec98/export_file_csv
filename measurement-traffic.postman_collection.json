@@ -1,0 +1,207 @@
+{
+	"info": {
+		"_postman_id": "086dc25e-5a76-47d4-9b4f-7e2af9e5c4b0",
+		"name": "measurement-traffic",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Search measurement weather by filter",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authority",
+						"value": "gateway.master.rmhub.leannet.eu"
+					},
+					{
+						"key": "pragma",
+						"value": "no-cache"
+					},
+					{
+						"key": "cache-control",
+						"value": "no-cache"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\" Not;A Brand\";v=\"99\", \"Google Chrome\";v=\"97\", \"Chromium\";v=\"97\""
+					},
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "origin",
+						"value": "https://gateway.master.rmhub.leannet.eu"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-origin"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "accept-language",
+						"value": "vi,en-US;q=0.9,en;q=0.8,vi-VN;q=0.7,fr-FR;q=0.6,fr;q=0.5"
+					},
+					{
+						"key": "cookie",
+						"value": "{{cookie}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"fromTimestamp\":1640018674000,\"toTimestamp\":1641055474000,\"page\":0,\"size\":10,\"orders\":{\"period_date\":\"DESC\"}}"
+				},
+				"url": {
+					"raw": "{{server}}/traffic/filter",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"traffic",
+						"filter"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Export file csv",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authority",
+						"value": "gateway.master.rmhub.leannet.eu"
+					},
+					{
+						"key": "pragma",
+						"value": "no-cache"
+					},
+					{
+						"key": "cache-control",
+						"value": "no-cache"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\" Not;A Brand\";v=\"99\", \"Google Chrome\";v=\"97\", \"Chromium\";v=\"97\""
+					},
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "origin",
+						"value": "https://gateway.master.rmhub.leannet.eu"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-origin"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "accept-language",
+						"value": "vi,en-US;q=0.9,en;q=0.8,vi-VN;q=0.7,fr-FR;q=0.6,fr;q=0.5"
+					},
+					{
+						"key": "cookie",
+						"value": "{{cookie}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"fromTimestamp\":1640018674000,\"toTimestamp\":1641055474000,\"orders\":{\"period_date\":\"DESC\"}}"
+				},
+				"url": {
+					"raw": "{{server}}/traffic/export",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"traffic",
+						"export"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "server",
+			"value": "localhost:8078",
+			"type": "string"
+		},
+		{
+			"key": "cookie",
+			"value": "SESSION=1751118a-c5a6-4142-9367-27e6612d2016",
+			"type": "string"
+		}
+	]
+}

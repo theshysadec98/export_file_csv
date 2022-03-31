@@ -1,0 +1,40 @@
+### Description ###
+# This is a template for a `Java` based microservice repository's pipeline.
+# After the routing will include the main part of the pipeline from a remote repository.
+# More details and usage found in [README.md](/templates/README.md)
+
+stages:
+ - pipeline_route
+
+merge_pipeline:
+  stage: pipeline_route
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  trigger:
+    include:
+      - project: lillyneir-dev/rmhub-services/centralized-pipelines
+        ref: master
+        file: /scenarios/merge-java.yaml
+    strategy: depend
+
+master_pipeline:
+  stage: pipeline_route
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  trigger:
+    include:
+      - project: lillyneir-dev/rmhub-services/centralized-pipelines
+        ref: master
+        file: /scenarios/commit-master-java.yaml
+    strategy: depend
+
+tag_pipeline:
+  stage: pipeline_route
+  rules:
+    - if: $CI_COMMIT_TAG
+  trigger:
+    include:
+      - project: lillyneir-dev/rmhub-services/centralized-pipelines
+        ref: master
+        file: /scenarios/tag.yaml
+    strategy: depend

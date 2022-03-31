@@ -1,0 +1,66 @@
+LaneMeasurementResponse:
+  type: object
+  properties:
+    name:
+      type: string
+    speed:
+      type: integer
+      format: int32
+    saturation:
+      type: integer
+      format: int32
+    vehicles:
+      type: integer
+      format: int32
+
+DirectionMeasurementResponse:
+  type: object
+  properties:
+    name:
+      type: string
+    lanes:
+      type: array
+      items:
+        $ref: "#/LaneMeasurementResponse"
+
+DeviceMeasurementResponse:
+  type: object
+  properties:
+    name:
+      type: string
+    directions:
+      type: array
+      items:
+        $ref: "#/DirectionMeasurementResponse"
+
+TrafficMeasurementResponse:
+  type: object
+  properties:
+    timestamp:
+      type: integer
+      format: int64
+    deviceMeasurements:
+      type: array
+      items:
+        $ref: "#/DeviceMeasurementResponse"
+
+ResultListTrafficMeasurementResponse:
+  type: object
+  properties:
+    timestamp:
+      type: integer
+      format: int64
+    data:
+      type: array
+      items:
+        $ref: "#/TrafficMeasurementResponse"
+    status:
+      type: string
+    message:
+      type: array
+      items:
+        type: string
+    path:
+      type: string
+    metadata:
+      type: object

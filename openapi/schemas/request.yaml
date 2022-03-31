@@ -1,0 +1,66 @@
+FilterRequest:
+  type: object
+  properties:
+    page:
+      type: integer
+      format: int32
+    size:
+      type: integer
+      format: int32
+    orders:
+      type: object
+      additionalProperties:
+        type: string
+
+
+ExportRequest:
+  type: object
+  properties:
+    orders:
+      type: object
+      additionalProperties:
+        type: string
+    fromTimestamp:
+      type: integer
+      format: int64
+    toTimestamp:
+      type: integer
+      format: int64
+    highway:
+      type: string
+    deviceNames:
+      type: array
+      items:
+        type: string
+
+DirectionRequest:
+  type: object
+  properties:
+    name:
+      type: string
+    lane:
+      type: array
+      items:
+        type: string
+
+TrafficSearchRequest:
+  allOf:
+    - $ref: "#/FilterRequest"
+    - type: object
+      properties:
+        highway:
+          type: string
+        fromTimestamp:
+          type: integer
+          format: int64
+        toTimestamp:
+          type: integer
+          format: int64
+        deviceNames:
+          type: array
+          items:
+            type: string
+        directions:
+          type: array
+          items:
+            $ref: "#/DirectionRequest"

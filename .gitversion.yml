@@ -1,0 +1,57 @@
+assembly-versioning-scheme: MajorMinorPatch
+assembly-file-versioning-scheme: MajorMinorPatch
+mode: Mainline
+continuous-delivery-fallback-tag: ci
+tag-prefix: '[vV]'
+major-version-bump-message: '\+semver:\s?(breaking|major)'
+minor-version-bump-message: '\+semver:\s?(feature|minor)'
+patch-version-bump-message: '\+semver:\s?(fix|patch)'
+no-bump-message: '\+semver:\s?(none|skip)'
+legacy-semver-padding: 4
+build-metadata-padding: 4
+commits-since-version-source-padding: 4
+tag-pre-release-weight: 60000
+commit-message-incrementing: Enabled
+commit-date-format: yyyy-MM-dd
+merge-message-formats: {}
+update-build-number: true
+branches:
+  master:
+    regex: ^master$|^main$
+    tag: ''
+    increment: Minor
+    prevent-increment-of-merged-branch-version: true
+    track-merge-target: false
+    tracks-release-branches: false
+    is-release-branch: false
+    is-mainline: true
+    pre-release-weight: 55000
+  feature:
+    tag: useBranchName
+    increment: Minor
+    prevent-increment-of-merged-branch-version: true
+    track-merge-target: false
+    regex: ^features?[/-]
+    source-branches:
+    - master
+    tracks-release-branches: false
+    is-release-branch: false
+    is-mainline: false
+    pre-release-weight: 30000
+  hotfix:
+    tag: useBranchName
+    # mode: ContinuousDelivery
+    increment: Patch
+    prevent-increment-of-merged-branch-version: true
+    track-merge-target: false
+    regex: ^(?!(feature|master|main|release))
+    source-branches:
+    - master
+    - feature
+    - hotfix
+    tracks-release-branches: false
+    is-release-branch: false
+    is-mainline: false
+    pre-release-weight: 30000
+ignore:
+  sha: []

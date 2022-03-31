@@ -1,0 +1,1 @@
+alter table device add column origin_id varchar(255);

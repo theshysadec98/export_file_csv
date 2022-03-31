@@ -1,0 +1,73 @@
+{
+  "data": {
+    "saturation": [
+      {
+        "direction": "1",
+        "lane": "0",
+        "value": 12
+      },
+      {
+        "direction": "2",
+        "lane": "2",
+        "value": 23
+      },
+      {
+        "direction": "1",
+        "lane": "1",
+        "value": 56
+      },
+      {
+        "direction": "2",
+        "lane": "3",
+        "value": 76
+      }
+    ],
+    "speed": [
+      {
+        "direction": "1",
+        "lane": "0",
+        "value": 100
+      },
+      {
+        "direction": "2",
+        "lane": "2",
+        "value": 120
+      },
+      {
+        "direction": "1",
+        "lane": "1",
+        "value": 17
+      },
+      {
+        "direction": "2",
+        "lane": "3",
+        "value": 24
+      }
+    ],
+    "vehicles": [
+      {
+        "direction": "1",
+        "lane": "0",
+        "value": 14
+      },
+      {
+        "direction": "2",
+        "lane": "2",
+        "value": 19
+      },
+      {
+        "direction": "1",
+        "lane": "1",
+        "value": 98
+      },
+      {
+        "direction": "2",
+        "lane": "3",
+        "value": 26
+      }
+    ]
+  },
+  "highway": "M44",
+  "name": "TC_61_880",
+  "timestamp": "2021-12-29T06:55:00Z"
+}

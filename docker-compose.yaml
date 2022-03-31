@@ -1,0 +1,52 @@
+version: "2"
+
+services:
+  kafka:
+    image: obsidiandynamics/kafka
+    restart: "no"
+    ports:
+      - "2181:2181"
+      - "9092:9092"
+    environment:
+      KAFKA_LISTENERS: "INTERNAL://:29092,EXTERNAL://:9092"
+      KAFKA_ADVERTISED_LISTENERS: "INTERNAL://kafka:29092,EXTERNAL://localhost:9092"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT"
+      KAFKA_INTER_BROKER_LISTENER_NAME: "INTERNAL"
+      KAFKA_ZOOKEEPER_SESSION_TIMEOUT: "6000"
+      KAFKA_RESTART_ATTEMPTS: "10"
+      KAFKA_RESTART_DELAY: "5"
+      ZOOKEEPER_AUTOPURGE_PURGE_INTERVAL: "0"
+
+  db:
+    image: postgres
+    restart: "no"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: rmhub2
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+
+  kafdrop:
+    image: obsidiandynamics/kafdrop:3.27.0
+    ports:
+      - "9000:9000"
+    restart: "no"
+    environment:
+      KAFKA_BROKERCONNECT: "kafka:29092"
+      SERVER_SERVLET_CONTEXTPATH: /
+      JVM_OPTS: "-Xms16M -Xmx48M -Xss180K -XX:-TieredCompilation -XX:+UseStringDeduplication -noverify"
+    depends_on:
+      - kafka
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:master
+    ports:
+      - "8080:8080"
+    restart: "no"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: "local"
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: "kafka:29092"
+      KAFKA_CLUSTERS_0_ZOOKEEPER: "localhost:2181"
+    depends_on:
+      - kafka

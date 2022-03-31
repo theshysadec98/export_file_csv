@@ -1,0 +1,43 @@
+/traffic/filter:
+  post:
+    tags:
+      - "traffic-controller"
+    summary: "Search measurement traffic"
+    operationId: filter
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/request.yaml#/TrafficSearchRequest"
+    responses:
+      200:
+        description: "Accepted"
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/response.yaml#/ResultListTrafficMeasurementResponse'
+      500:
+        description: "Server error"
+
+/traffic/export:
+  post:
+    tags:
+      - "traffic-controller"
+    summary: "Export measurement traffic"
+    operationId: export
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/request.yaml#/ExportRequest"
+    responses:
+      200:
+        description: "Accepted"
+        content:
+          application/json:
+            schema:
+              type: object
+      500:
+        description: "Server error"

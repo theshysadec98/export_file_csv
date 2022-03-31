@@ -1,0 +1,20 @@
+openapi: "3.0.0"
+info:
+  version: "0.0.1"
+  title: Measurement Traffic Module API
+  description: This specification is for the Measurement Traffic Module
+  contact:
+    name: Lillyneir Ltd.
+    url: https://lillyneir.hu
+    email: dev"lillyneir.hu
+servers:
+  - url: http://localhost:8078/v1
+    description: "Placeholder for real server url"
+tags:
+  - name: "traffic-controller"
+    description: "Filter measurement traffic"
+paths:
+  /traffic/filter:
+    $ref: "./openapi/path/measurement-traffic.yaml#/~1traffic~1filter"
+  /traffic/export:
+    $ref: "./openapi/path/measurement-traffic.yaml#/~1traffic~1export"
