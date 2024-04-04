@@ -2,6 +2,8 @@ package rmhub.mod.measurementtraffic.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,7 @@ import rmhub.mod.measurementtraffic.service.TrafficInformationService;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class MeasurementTrafficServiceImpl implements MeasurementTrafficService {
 
   private final DeviceService deviceService;
@@ -28,13 +31,6 @@ public class MeasurementTrafficServiceImpl implements MeasurementTrafficService 
   private final DirectionLaneService directionLaneService;
 
   private final TrafficInformationService trafficInformationService;
-
-  public MeasurementTrafficServiceImpl(DeviceService deviceService, DirectionLaneService directionLaneService,
-      TrafficInformationService trafficInformationService) {
-    this.deviceService = deviceService;
-    this.directionLaneService = directionLaneService;
-    this.trafficInformationService = trafficInformationService;
-  }
 
   @Transactional
   @Override
@@ -48,20 +44,20 @@ public class MeasurementTrafficServiceImpl implements MeasurementTrafficService 
       return;
     }
 
-    Device device =  deviceService.getOrCreate(getDevice(measurement));
+    final Device device =  this.deviceService.getOrCreate(getDevice(measurement));
     if (device == null) {
       log.info("Do not get or create device: highway = {}, name = {}", measurement.getHighway(), measurement.getName());
       return;
     }
 
-    List<DirectionLane> directionLaneList = directionLaneService.getOrCreate(getDirectionLaneList(measurement));
+    final List<DirectionLane> directionLaneList = this.directionLaneService.getOrCreate(getDirectionLaneList(measurement));
     if (CollectionUtils.isEmpty(directionLaneList)) {
       log.info("Do not get or create list of direction lane");
       return;
     }
 
-    List<TrafficInformationRequest> trafficInformationRequests = getTrafficInformationList(measurement);
-    trafficInformationService.create(device, directionLaneList, trafficInformationRequests);
+    final List<TrafficInformationRequest> trafficInformationRequests = this.getTrafficInformationList(measurement);
+    this.trafficInformationService.create(device, directionLaneList, trafficInformationRequests);
   }
 
   private DeviceRequest getDevice(Measurement measurement) {

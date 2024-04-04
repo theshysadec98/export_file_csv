@@ -8,6 +8,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
@@ -46,6 +48,7 @@ import static rmhub.mod.measurementtraffic.model.response.RestResult.STATUS_SUCC
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class TrafficInformationServiceImpl implements TrafficInformationService {
 
   private static final int PERIOD_TIME = 1;
@@ -54,10 +57,6 @@ public class TrafficInformationServiceImpl implements TrafficInformationService 
   private String timeZone;
 
   private final TrafficInformationRepository repository;
-
-  public TrafficInformationServiceImpl(TrafficInformationRepository repository) {
-    this.repository = repository;
-  }
 
   @Override
   public List<TrafficInformation> create(Device device, List<DirectionLane> directionLanes, List<TrafficInformationRequest> requests) {

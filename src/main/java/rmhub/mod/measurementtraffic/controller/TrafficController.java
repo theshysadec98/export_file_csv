@@ -3,6 +3,7 @@ package rmhub.mod.measurementtraffic.controller;
 import java.util.Collections;
 import java.util.Date;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,15 +17,12 @@ import rmhub.mod.measurementtraffic.model.response.RestResult;
 import rmhub.mod.measurementtraffic.model.TrafficMeasurementResponse;
 import rmhub.mod.measurementtraffic.service.TrafficInformationService;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TrafficController implements TrafficApi{
 
-  private TrafficInformationService trafficInformationService;
-
-  public TrafficController(TrafficInformationService trafficInformationService) {
-    this.trafficInformationService = trafficInformationService;
-  }
+  private final TrafficInformationService trafficInformationService;
 
   @Override
   public ResponseEntity<ResultListTrafficMeasurementResponse> filter(TrafficSearchRequest trafficSearchRequest) {

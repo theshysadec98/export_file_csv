@@ -48,6 +48,14 @@ public class DeviceServiceTest {
   }
 
   @Test
+  public void testGetDeviceWithRequestNull() {
+    DeviceRequest deviceRequest = new DeviceRequest();
+    Device entity = this.deviceService.getOrCreate(deviceRequest);
+    Assert.assertNull(entity.getHighway());
+    Assert.assertNull(entity.getName());
+  }
+
+  @Test
   public void testCreateDevice() {
     DeviceRequest deviceRequest = getRequest();
     Device device = getDevice();

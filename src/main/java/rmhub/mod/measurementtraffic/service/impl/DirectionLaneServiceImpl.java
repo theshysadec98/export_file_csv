@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -16,13 +18,10 @@ import rmhub.mod.measurementtraffic.service.DirectionLaneService;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class DirectionLaneServiceImpl implements DirectionLaneService {
 
   private DirectionLaneRepository repository;
-
-  public DirectionLaneServiceImpl(DirectionLaneRepository repository) {
-    this.repository = repository;
-  }
 
   @Override
   public List<DirectionLane> getOrCreate(List<DirectionLaneRequest> requests) {

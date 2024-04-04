@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import rmhub.mod.measurementtraffic.model.entity.DirectionLane;
 import rmhub.mod.measurementtraffic.model.request.DirectionLaneRequest;
@@ -19,6 +20,7 @@ import rmhub.mod.measurementtraffic.service.impl.DirectionLaneServiceImpl;
 @SpringBootTest
 public class DirectionLaneServiceTest {
 
+  @Autowired
   private DirectionLaneService directionLaneService;
 
   @Mock
@@ -33,7 +35,6 @@ public class DirectionLaneServiceTest {
   @Before
   public void init() {
     MockitoAnnotations.initMocks(this);
-    this.directionLaneService = new DirectionLaneServiceImpl(directionLaneRepository);
     this.createdDirection = "1";
     this.createdLane = "1";
     this.creatingDirection = "2";
@@ -65,7 +66,7 @@ public class DirectionLaneServiceTest {
     Mockito.when(directionLaneRepository.findFirstByDirectionAndLane(Mockito.eq(creatingDirection), Mockito.eq(creatingLane))).thenReturn(null);
     Mockito.when(directionLaneRepository.saveAll(Mockito.any())).thenReturn(Collections.singletonList(creatingDirectionLane));
 
-    List<DirectionLane> directionLaneList = directionLaneService.getOrCreate(requests);
+    List<DirectionLane> directionLaneList = this.directionLaneService.getOrCreate(requests);
 
     Mockito.verify(directionLaneRepository, Mockito.times(2)).findFirstByDirectionAndLane(Mockito.anyString(), Mockito.anyString());
     Mockito.verify(directionLaneRepository).saveAll(Mockito.any());
